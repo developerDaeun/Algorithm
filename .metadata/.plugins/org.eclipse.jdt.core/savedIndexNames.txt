@@ -1,4 +1,0 @@
-INDEX VERSION 1.131+C:\ssafy\algo_study\.metadata\.plugins\org.eclipse.jdt.core
-2277357373.index
-3749551110.index
-3875843113.index
