@@ -24,13 +24,14 @@ public class BOJ1592_영식이와친구들 {
 	}
 
 	static int game(int cur, int total) {	// cur: 0번 시작, total: 총 공을 받은 횟수
+		getBall[cur] = 1;	// 처음 공을 받은 사람 횟수 + 1
 		while(getBall[cur] != M) {
-			getBall[cur]++; // 현재 받은 사람의 받은 횟수 추가
 			if(getBall[cur]%2==1) {	// 홀수번 공을 받았으면 시계방향으로 L번째 사람에게 공 던짐
 				cur = (cur+L)%N; // ex) N이 5일때, 3번째 사람이 2칸뒤인 0번째 사람에게 공을 던지려면 (3+2)%5 = 0번째 사람
 			}else {	// 짝수번 공을 받았으면 반시계방향으로 L번째 사람에게 공 던짐
 				cur = ((N-L)+cur)%N; // ex) N이 5일때, 1번째 사람이 2칸 앞인 4번째 사람에게 공을 던지려면 ((5-2)+1)%5 = 4번째 사람
-			}
+			}	
+			getBall[cur]++; // 현재 받은 사람의 받은 횟수 추가
 			total++;
 		}
 		return total;
