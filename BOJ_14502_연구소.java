@@ -103,8 +103,6 @@ public class BOJ_14502_연구소 {
 				visited[nr][nc] = true;
 			}
 		}
-		
-		max = Math.max(max, count());	// 안전영역 개수 최대값 구하기
 	}
 	
 	static void copy() {
