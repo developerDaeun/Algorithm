@@ -45,7 +45,7 @@ public class BOJ_1697_숨바꼭질 {
 					time[cur.num-1] = cur.time+1;
 				}
 			}
-			if(cur.num+1 <= 100000) {
+			if(cur.num+1 <= K) {
 				if(v[cur.num+1]) time[cur.num+1] = Math.min(time[cur.num+1], cur.time+1);	// 이미 방문했으면 최소 시간만 변경
 				else {
 					q.offer(new Data(cur.num+1, cur.time+1));
