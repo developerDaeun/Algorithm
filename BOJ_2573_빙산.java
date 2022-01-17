@@ -84,14 +84,12 @@ public class BOJ_2573_빙산 {
 
     static void bfs(){
         Queue<Data> q = new LinkedList<>();
-        boolean[][] visited = new boolean[N][M];
 
         // 빙산 찾기
         for (int i = 0; i < N; i++) {
             for (int j = 0; j < M; j++) {
                 if (map[i][j] > 0) {
                     q.offer(new Data(i, j));
-                    visited[i][j] = true;
                 }
             }
         }
@@ -100,7 +98,6 @@ public class BOJ_2573_빙산 {
             Data cur = q.poll();
 
             // 빙산이 있는 위치이면 주변 바다의 개수를 구한다.
-            if (map[cur.r][cur.c] > 0) {
                 int sum = 0;    // 주변 바다의 개수
                 for (int d = 0; d < 4; d++) {
                     int nr = cur.r + dr[d];
@@ -121,7 +118,6 @@ public class BOJ_2573_빙산 {
                 }else{
                     copyMap[cur.r][cur.c] = map[cur.r][cur.c] - sum;
                 }
-            }
         }
 
         copy();
