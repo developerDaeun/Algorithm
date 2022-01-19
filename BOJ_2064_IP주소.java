@@ -20,7 +20,7 @@ public class BOJ_2064_IP주소 {
             }
         }
 
-        // 네트워크 마스크 ★★★★★
+        // 네트워크 마스크 ★★★★★★
         int mask = 0;
         end:for (int i = 31; i >= 0; i--){
             int bit = 1 << i;
