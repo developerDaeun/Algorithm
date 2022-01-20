@@ -6,7 +6,7 @@ public class BOJ_17244_아맞다우산 {
 
     static int R, C;
     static char[][] map;
-    static int Sr, Sc, Er, Ec;
+    static int Sr, Sc;
     static int bit;
     static int res;
 
@@ -18,22 +18,27 @@ public class BOJ_17244_아맞다우산 {
         R = Integer.parseInt(st.nextToken());
         map = new char[R][C];
 
-        int num = 0;
+        int num = 0;    // 물건의 개수
         for (int i = 0; i < R; i++) {
             st = new StringTokenizer(br.readLine());
+            String s = st.nextToken();
             for (int j = 0; j < C; j++) {
-                map[i][j] = st.nextToken().charAt(0);
+                map[i][j] = s.charAt(j);
                 // 현재 위치 S  나가는 문 E  물건 위치 X
                 if (map[i][j] == 'S') {
                     Sr = i;
                     Sc = j;
                 } else if (map[i][j] == 'X') {
-                    map[i][j] = (char) num++;
+                    map[i][j] = Character.forDigit(num++, 10);   // num => 0, 1, 2        1 << num
                 }
             }
         }
 
-        res = Integer.MAX_VALUE;
+        // 물건의 개수만큼 bit 에 1 채우기 => 모든 물건을 챙겼는 지 확인하기 위한 용도
+        for (int i = 0; i < num; i++){
+            bit += (1 << i);
+        }
+
         bfs();
 
         System.out.print(res);
@@ -46,7 +51,7 @@ public class BOJ_17244_아맞다우산 {
         Queue<Data> q = new LinkedList<>();
         boolean[][][] v = new boolean[R][C][32];    // 1 1 1 1 1 => 31까지 나올 수 있음
 
-        q.offer(new Data(Sr, Sc, 0));
+        q.offer(new Data(Sr, Sc, 0, 0));
         v[Sr][Sc][0] = true;
 
         while (!q.isEmpty()) {
@@ -56,30 +61,34 @@ public class BOJ_17244_아맞다우산 {
                 int nr = cur.r + dr[d];
                 int nc = cur.c + dc[d];
 
-                if (map[nr][nc] == 'E' && ) {    // 문을 만나면 break
-                    res = Math.min(res, cur.time + 1);
+                // S 위치이거나, 벽을 만나면 continue
+                if(v[nr][nc][cur.bits] || map[nr][nc] == 'S' || map[nr][nc] == '#') continue;
+
+                // 모든 물건을 챙겼을 때(bit에서 물건의 개수만큼 1일때) 결과값 구하고 break
+                if (map[nr][nc] == 'E' && cur.bits == bit){
+                    res = cur.time + 1;
                     break;
                 }
 
-                if (v[nr][nc][0] || map[nr][nc] == '#')
-                    continue;
+                // 문을 만나고, 모든 물건을 챙기지 않았을 때 continue
+                if (map[nr][nc] == 'E') continue;
 
-                // . 과 X 를 만나면 큐에 삽입, 방문체크
-                if(map[nr][nc] == '.') {
+                // . 을 만나면 큐에 삽입, 방문체크
+                if (map[nr][nc] == '.') {
                     q.offer(new Data(nr, nc, cur.time + 1, cur.bits));
-                    v[nr][nc][0] = true;
+                    v[nr][nc][cur.bits] = true;
+                    continue;
                 }
 
-                // . 이면 continue
-                if (map[nr][nc] == '.') continue;
+                // 이미 챙긴 물건이면 continue
+                // 지금까지 챙긴 물건(cur.bits)과 현재 물건(1 << map[nr][nc]) 을 or 연산하면
+                // 챙긴 물건인 지 방문체크로 알 수 있다.
+                if(v[nr][nc][cur.bits | (1 << (map[nr][nc] - '0'))]) continue;
 
-                // 물건을 만나면 (bit = bit | 1 << 물건숫자) 로 물건 체크
-                if (v[nr][nc][0 | 1 << map[nr][nc] - '0']) continue;    // 챙긴 물건이면 continue
-
-
-
+                // 물건을 만나면 큐에 삽입, 방문체크
+                q.offer(new Data(nr, nc, cur.time + 1, cur.bits | (1 << (map[nr][nc] - '0'))));
+                v[nr][nc][cur.bits | (1 << (map[nr][nc] - '0'))] = true;
             }
-
         }
     }
 
