@@ -30,7 +30,7 @@ public class BOJ_17244_아맞다우산 {
                     Sr = i;
                     Sc = j;
                 } else if (map[i][j] == 'X') {
-                    map[i][j] = Character.forDigit(num++, 10);   // num => 0, 1, 2        1 << num
+                    map[i][j] = Character.forDigit(num++, 10);   // num => 0,1,2  1 << num
                 }
             }
         }
@@ -62,7 +62,7 @@ public class BOJ_17244_아맞다우산 {
                 int nr = cur.r + dr[d];
                 int nc = cur.c + dc[d];
 
-                // 벽을 만나면 continue
+                // 벽을 만나거나, 이미 챙긴 물건위치이면 continue
                 if(map[nr][nc] == '#' || v[nr][nc][cur.bits]) continue;
 
                 // 모든 물건을 챙겼을 때(bit에서 물건의 개수만큼 1일때) 결과값 구하고 break
@@ -85,7 +85,7 @@ public class BOJ_17244_아맞다우산 {
                 // 챙긴 물건인 지 방문체크로 알 수 있다.
                 int itemBits = cur.bits | (1 << (map[nr][nc] - '0'));
 
-                // 이미 챙긴 물건이면 continue
+                // 이미 지금까지 챙긴 물건이면 continue
                 if(v[nr][nc][itemBits]) continue;
 
                 // 물건을 만나면 큐에 삽입, 방문체크
