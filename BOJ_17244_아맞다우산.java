@@ -26,6 +26,7 @@ public class BOJ_17244_아맞다우산 {
                 map[i][j] = s.charAt(j);
                 // 현재 위치 S  나가는 문 E  물건 위치 X
                 if (map[i][j] == 'S') {
+                    map[i][j] = '.';    // 시작 위치를 . 으로 변경 ★★★★★
                     Sr = i;
                     Sc = j;
                 } else if (map[i][j] == 'X') {
@@ -52,7 +53,7 @@ public class BOJ_17244_아맞다우산 {
         boolean[][][] v = new boolean[R][C][32];    // 1 1 1 1 1 => 31까지 나올 수 있음
 
         q.offer(new Data(Sr, Sc, 0, 0));
-        v[Sr][Sc][0] = true;
+        v[Sr][Sc][0] = true;    // 아직 물건을 하나도 줍지 않았음(00000000 == 0)
 
         while (!q.isEmpty()) {
             Data cur = q.poll();
@@ -61,8 +62,8 @@ public class BOJ_17244_아맞다우산 {
                 int nr = cur.r + dr[d];
                 int nc = cur.c + dc[d];
 
-                // S 위치이거나, 벽을 만나면 continue
-                if(v[nr][nc][cur.bits] || map[nr][nc] == 'S' || map[nr][nc] == '#') continue;
+                // 벽을 만나면 continue
+                if(map[nr][nc] == '#' || v[nr][nc][cur.bits]) continue;
 
                 // 모든 물건을 챙겼을 때(bit에서 물건의 개수만큼 1일때) 결과값 구하고 break
                 if (map[nr][nc] == 'E' && cur.bits == bit){
@@ -80,14 +81,16 @@ public class BOJ_17244_아맞다우산 {
                     continue;
                 }
 
-                // 이미 챙긴 물건이면 continue
                 // 지금까지 챙긴 물건(cur.bits)과 현재 물건(1 << map[nr][nc]) 을 or 연산하면
                 // 챙긴 물건인 지 방문체크로 알 수 있다.
-                if(v[nr][nc][cur.bits | (1 << (map[nr][nc] - '0'))]) continue;
+                int itemBits = cur.bits | (1 << (map[nr][nc] - '0'));
+
+                // 이미 챙긴 물건이면 continue
+                if(v[nr][nc][itemBits]) continue;
 
                 // 물건을 만나면 큐에 삽입, 방문체크
-                q.offer(new Data(nr, nc, cur.time + 1, cur.bits | (1 << (map[nr][nc] - '0'))));
-                v[nr][nc][cur.bits | (1 << (map[nr][nc] - '0'))] = true;
+                q.offer(new Data(nr, nc, cur.time + 1, itemBits));
+                v[nr][nc][itemBits] = true;
             }
         }
     }
