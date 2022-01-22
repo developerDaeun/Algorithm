@@ -1,9 +1,6 @@
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
-/**
- * P[PPAP][PPAP]A[PPAP][PPAP]A[PPAP]A[PPAP][PPAP]A[PPAP]
- */
 public class BOJ_16120_PPAP {
 
     public static void main(String[] args) throws Exception{
@@ -14,11 +11,11 @@ public class BOJ_16120_PPAP {
         int cnt = 0;
         for (int i = 0; i < s.length(); i++){
             if(s.charAt(i) == 'P') cnt++;
-            else{
+            else{   // A 다음 P 이면 -1
                 if(i+1 < s.length() && s.charAt(i+1) == 'P') {
                     cnt--;
                     i++;
-                }else{
+                }else{  // A 다음 A 를 만나면 0, break
                     cnt = 0;
                     break;
                 }
