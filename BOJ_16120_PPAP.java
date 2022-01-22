@@ -12,14 +12,18 @@ public class BOJ_16120_PPAP {
         String s = br.readLine();
 
         int cnt = 0;
-        for (int i = 0; i < s.length()-1; i++){
+        for (int i = 0; i < s.length(); i++){
             if(s.charAt(i) == 'P') cnt++;
             else{
-                if(s.charAt(i+1) == 'P') {
+                if(i+1 < s.length() && s.charAt(i+1) == 'P') {
                     cnt--;
                     i++;
+                }else{
+                    cnt = 0;
+                    break;
                 }
             }
+            if(cnt < 1) break;
         }
 
         if(cnt == 1) System.out.print("PPAP");
