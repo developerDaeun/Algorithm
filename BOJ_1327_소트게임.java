@@ -68,7 +68,7 @@ public class BOJ_1327_소트게임 {
 
     static class Data {
         String s;
-        int cnt;
+        int cnt;    // 선택한 수의 개수
 
         public Data(String s, int cnt) {
             this.s = s;
