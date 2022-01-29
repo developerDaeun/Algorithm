@@ -8,7 +8,7 @@ public class BOJ_6603_로또 {
     static int[] S, numbers;
     static StringBuilder sb;
 
-    public static void main(String[] args) throws Exception{
+    public static void main(String[] args) throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         sb = new StringBuilder();
         numbers = new int[6];
@@ -17,7 +17,7 @@ public class BOJ_6603_로또 {
             StringTokenizer st = new StringTokenizer(br.readLine());
             k = Integer.parseInt(st.nextToken());
 
-            if(k == 0) break;
+            if (k == 0) break;
 
             S = new int[k];
             for (int i = 0; i < k; i++) {
@@ -32,20 +32,20 @@ public class BOJ_6603_로또 {
         System.out.print(sb);
     }
 
-    static void comb(int start, int cnt, int flag){
-        if(cnt == 6){
-            for (int i = 0; i < 6; i++){
+    static void comb(int start, int cnt, int flag) {
+        if (cnt == 6) {
+            for (int i = 0; i < 6; i++) {
                 sb.append(numbers[i]).append(" ");
             }
             sb.append("\n");
             return;
         }
 
-        for(int i = start; i < k; i++){
-            if((flag & 1 << i) != 0) continue;
+        for (int i = start; i < k; i++) {
+            if ((flag & 1 << i) != 0) continue;
 
             numbers[cnt] = S[i];
-            comb(i+1,cnt+1, flag | 1 << i);
+            comb(i + 1, cnt + 1, flag | 1 << i);
         }
     }
 }
