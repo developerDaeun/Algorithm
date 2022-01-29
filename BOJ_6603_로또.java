@@ -24,7 +24,7 @@ public class BOJ_6603_로또 {
                 S[i] = Integer.parseInt(st.nextToken());
             }
 
-            comb(0, 0, 0);
+            comb(0, 0);
 
             sb.append("\n");
         }
@@ -32,7 +32,7 @@ public class BOJ_6603_로또 {
         System.out.print(sb);
     }
 
-    static void comb(int start, int cnt, int flag) {
+    static void comb(int start, int cnt) {
         if (cnt == 6) {
             for (int i = 0; i < 6; i++) {
                 sb.append(numbers[i]).append(" ");
@@ -42,10 +42,8 @@ public class BOJ_6603_로또 {
         }
 
         for (int i = start; i < k; i++) {
-            if ((flag & 1 << i) != 0) continue;
-
             numbers[cnt] = S[i];
-            comb(i + 1, cnt + 1, flag | 1 << i);
+            comb(i + 1, cnt + 1);
         }
     }
 }
