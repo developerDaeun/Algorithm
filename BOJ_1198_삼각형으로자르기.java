@@ -13,7 +13,7 @@ public class BOJ_1198_삼각형으로자르기 {
         for (int i = 0; i < N; i++) {
             s = br.readLine().split(" ");
             a[i][0] = Integer.parseInt(s[0]);
-            a[i][1] = Integer.parseInt(s[1]);
+            a[i][1] = Integer.parseInt(s[1]); 
         }
 
         // 점 3개씩 골라서 최대 넓이 구하기
