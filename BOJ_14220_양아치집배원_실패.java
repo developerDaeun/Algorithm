@@ -2,7 +2,7 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
-public class BOJ_14220_양아치집배원 {
+public class BOJ_14220_양아치집배원_실패 {
 
     static int n, arr[][], dp[][], res;
 

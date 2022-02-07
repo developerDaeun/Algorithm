@@ -36,6 +36,7 @@ public class BOJ_1079_마피아 {
 
     private static void mafia(int cnt, int day) {
 
+        // 은진이가 죽었거나 1명이 남았을 때 return
         if (isDead[eunjin] || cnt == 1) {
             res = Math.max(res, day);
             return;
@@ -43,7 +44,7 @@ public class BOJ_1079_마피아 {
 
         if ((cnt & 1) == 0) {   // 짝수 => 밤 => 마피아가 사람 죽임
             for (int i = 0; i < N; i++) {
-                if (i == eunjin || isDead[i]) continue;
+                if (i == eunjin || isDead[i]) continue; // 은진이거나 죽은사람이면 continue
 
                 isDead[i] = true;
                 for (int j = 0; j < N; j++) {
@@ -51,9 +52,9 @@ public class BOJ_1079_마피아 {
                     C[j] += R[i][j];
                 }
 
-                mafia(cnt - 1, day + 1);
+                mafia(cnt - 1, day + 1);    // 한명 빼기, 밤이므로 날짜 + 1
 
-                for (int j = 0; j < N; j++) {
+                for (int j = 0; j < N; j++) {   // 백트래킹 !!
                     if (isDead[j]) continue;
                     C[j] -= R[i][j];
                 }
@@ -64,26 +65,17 @@ public class BOJ_1079_마피아 {
             // 죽일 사람 인덱스 구하기
             int killIdx = 0, maxScore = 0;
 
-            for (int i = 0; i < N; i++){
-                if(isDead[i]) continue;
-                if(maxScore < C[i]){
+            for (int i = 0; i < N; i++) {
+                if (isDead[i]) continue;
+                if (maxScore < C[i]) {
                     maxScore = C[i];
                     killIdx = i;
                 }
             }
 
             isDead[killIdx] = true;
-            mafia(cnt - 1, day);
+            mafia(cnt - 1, day);    // 한명 빼기, 낮이므로 날짜 그대로
             isDead[killIdx] = false;
-        }
-    }
-
-    static class Data {
-        int idx, score;
-
-        public Data(int idx, int score) {
-            this.idx = idx;
-            this.score = score;
         }
     }
 }
