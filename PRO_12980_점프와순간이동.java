@@ -1,7 +1,7 @@
-public class PG_12980_점프와순간이동 {
+public class PRO_12980_점프와순간이동 {
     public static void main(String[] args) {
 
-        System.out.print(new PG_12980_점프와순간이동().solution(1));
+        System.out.print(new PRO_12980_점프와순간이동().solution(1));
 
     }
 
