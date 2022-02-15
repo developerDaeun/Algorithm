@@ -5,6 +5,20 @@ public class PRO_43165_타겟넘버 {
 
     }
 
+    public static class Data implements Comparable<Data>{
+        int x, y;
+
+        public Data(int x, int y) {
+            this.x = x;
+            this.y = y;
+        }
+
+        @Override
+        public int compareTo(Data o) {
+            return this.x - o.x;
+        }
+    }
+
     public int Solution(int[] numbers, int target) {
         int ans = 0;
 
