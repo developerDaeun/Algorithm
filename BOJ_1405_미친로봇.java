@@ -20,6 +20,7 @@ public class BOJ_1405_미친로봇 {
         v = new boolean[29][29];    // 상하좌우로 갈 수 있는 위치 + 로봇위치 = 총 29*29
         ans = 0.0;
         v[14][14] = true;   // 로봇 위치 (가운데) 방문체크
+
         dfs(14, 14, 0, 1.0);
 
         System.out.print(ans);
