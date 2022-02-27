@@ -1,1 +1,0 @@
-![KakaoTalk_20211223_005232189_04](C:\Users\김다은\Pictures\내사진\KakaoTalk_20211223_005232189_04.jpg)
