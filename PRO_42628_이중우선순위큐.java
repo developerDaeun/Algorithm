@@ -3,8 +3,7 @@ import java.util.*;
 public class PRO_42628_이중우선순위큐 {
     public static void main(String[] args) {
 
-        System.out.print(Solution.solution(new String[]{"I 16", "D 1"}));// 72
-
+        System.out.print(Solution.solution(new String[]{"I 16", "D 1"}));
     }
 
     static class Solution {
