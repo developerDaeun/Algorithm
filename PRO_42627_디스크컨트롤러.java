@@ -33,11 +33,11 @@ public class PRO_42627_디스크컨트롤러 {
             for (int cnt = 1; cnt < jobs.length; cnt++) {   // 작업의 개수만큼 반복
                 // 다음 작업 구하기
                 boolean isWorking = false;  // 하드디스크가 작업중인지 체크하는 변수
-                int time = 1000;    // 다음 작업의 소요시간
+                int time = 1001;    // 다음 작업의 소요시간 (처음에 1000으로 초기화했더니 테케 틀림)
                 for (int i = 1; i < jobs.length; i++) {
                     if (v[i]) continue;
                     if (end > jobs[i][0]) {  // 마지막 작업의 종료시간 이전에 요청한 작업이 있을 때
-                        int hereTime = (end - jobs[i][0]) + jobs[i][1]; // i번째 작업의 요청부터 종료까지 소요시간
+                        int hereTime = jobs[i][1]; // i번째 작업의 소요시간
                         if (time > hereTime) {    // i번째 작업의 소요시간이 더 작다면 다음 작업의 idx 변경
                             idx = i;
                             time = hereTime;
@@ -49,12 +49,12 @@ public class PRO_42627_디스크컨트롤러 {
                 // 하드디스크가 작업중일 때
                 if (isWorking) {
                     v[idx] = true;
-                    answer += time;
+                    answer += (end - jobs[idx][0]) + time;    // 요청시간부터 종료시간까지 총 시간
                     end += jobs[idx][1];   // 마지막 작업의 종료시간 변경
                 }
                 // 하드디스크가 작업중이지 않을 때 다음 작업 구하기
                 else {
-                    for (int i = 0; i < jobs.length; i++) {
+                    for (int i = 0; i < jobs.length; i++) { // 이미 정렬을 해놨으므로, 방문 안한 작업을 찾으면 바로 작업
                         if (v[i]) continue;
                         v[i] = true;
                         answer += jobs[i][1];
