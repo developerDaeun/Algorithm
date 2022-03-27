@@ -7,10 +7,11 @@ public class PRO_42895_N으로표현 {
 
     static class Solution {
         public static int solution(int N, int number) {
-            int ans = 0;
+            int answer = 0;
 
+            
 
-            return ans;
+            return answer;
         }
     }
 }
