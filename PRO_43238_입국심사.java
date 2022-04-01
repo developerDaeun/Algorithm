@@ -1,4 +1,4 @@
-import java.util.*;
+import java.util.Arrays;
 
 public class PRO_43238_입국심사 {
     public static void main(String[] args) {
@@ -11,29 +11,30 @@ public class PRO_43238_입국심사 {
 
     static class Solution {
         public static long solution(int n, int[] times) {
-            long answer = 0;
 
-//            final long MAX = Long.MAX_VALUE;
+            Arrays.sort(times);
 
-            ArrayList<Long> list = new ArrayList<>();
+            long low = 1;
+            long high = (long) times[times.length - 1] * n;
+            long mid;
 
-            int cnt = 0;
-            int idx = 0;
-            int mul = 1;
-            while(cnt++ < n * times.length){
-                if(idx == times.length) {
-                    idx = 0;
-                    mul++;
+            while (low <= high) {
+                mid = (low + high) / 2;
+
+                // 가운데 값이 모두 심사하는 시간인지 체크
+                long cnt = 0;
+                for (int time : times) {
+                    cnt += (mid / time);
                 }
-                list.add((long)times[idx++] * mul);
+
+                if (cnt >= n) {   // n명을 모두 심사할 수 있으면 answer 업데이트
+                    high = mid - 1;
+                } else { // cnt < n
+                    low = mid + 1;
+                }
             }
 
-            Collections.sort(list);
-
-            answer = list.get(n - 1);
-
-            return answer;
+            return low;
         }
     }
-
 }
