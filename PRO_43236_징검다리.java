@@ -19,7 +19,14 @@ public class PRO_43236_징검다리 {
         }
         dist[len] = distance - rocks[len - 1];
 
+        int low = 0;
+        int high = len;
+        int mid;
+        while(low <= high){
+            mid = (high - low) / 2;
 
+
+        }
 
 
         return answer;
