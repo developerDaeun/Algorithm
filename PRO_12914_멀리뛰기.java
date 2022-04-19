@@ -12,7 +12,7 @@ public class PRO_12914_멀리뛰기 {
         else {
             for(int i = 2; i < n; i++){
                 answer = (first + second) % 1234567;
-                first = second % 1234567;
+                first = second;
                 second = answer;
             }
         }
