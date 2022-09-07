@@ -10,7 +10,7 @@ public class BOJ_1546 {
         int max = 0;
         for(int i = 0; i < N; i++){
             score[i] = Integer.parseInt(st.nextToken());
-            max = Math.max(max, score[i]);
+            max = Math.max(max, score[i]); 
         }
         
         double total = 0;
