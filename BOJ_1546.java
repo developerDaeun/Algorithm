@@ -15,7 +15,7 @@ public class BOJ_1546 {
         
         double total = 0;
         for(int i = 0; i < N; i++){
-            total += (double)score[i] / max * 100;
+            total += (double)score[i] / max * 100; 
         }
         
         System.out.print((double)total / N);
