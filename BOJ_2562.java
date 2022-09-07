@@ -10,7 +10,7 @@ public class BOJ_2562 {
             if(max < num){
                 idx = i + 1;
                 max = num;
-            }
+            } 
         }
         
         System.out.print(max + "\n" + idx);
